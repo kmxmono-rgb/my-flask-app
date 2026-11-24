@@ -21,6 +21,11 @@ def about():
 def contact():
   return render_template('contact.html')
 
+# 4. 地下兵工廠工具選單
+@app.route('/tools')
+def tools():
+  return render_template('tools.html')
+
 
 # 整合後的啟動設定：同時支援本地開發與 Render 部署
 if __name__ == '__main__':
