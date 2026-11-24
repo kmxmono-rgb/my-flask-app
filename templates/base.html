@@ -1,40 +1,78 @@
-<!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}我的網站{% endblock %}</title>
-    <!-- 引入 Bootstrap 5 CSS -->
-    <link href="https://jsdelivr.net" rel="stylesheet">
-</head>
-<body>
+{% extends 'base.html' %}
 
-    <!-- 導覽列選單 -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="{{ url_for('home') }}">我的 Flask 網站</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('home') }}">首頁</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('about') }}">關於我們</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+{% block title %}地下兵工廠 測試場 集中地{% endblock %}
 
-    <!-- 每個頁面的主內容會塞在這裡 -->
-    <div class="container mt-4">
-        {% block content %}{% endblock %}
-    </div>
+{% block content %}
+<style>
+  .classic-wrap {
+    font-family: "新細明體", PMingLiU, serif;
+    text-align: center;
+  }
+  .login-table {
+    margin: 0 auto 30px auto;
+    border-collapse: separate;
+    border-spacing: 2px;
+    border: 2px outset #cccccc;
+  }
+  .login-table td {
+    border: 1px inset #cccccc;
+    padding: 6px 10px;
+  }
+  .menu-table {
+    width: 100%;
+    max-width: 750px;
+    margin: 0 auto;
+    border-collapse: collapse;
+  }
+  .menu-table td {
+    border-top: 1px solid #999999;
+    border-bottom: 1px solid #999999;
+    padding: 10px 5px;
+    font-size: 22px;
+    letter-spacing: 1px;
+  }
+  .menu-table tr.spacer td {
+    height: 18px;
+  }
+  .menu-table a {
+    color: #0000EE;
+    text-decoration: underline;
+  }
+</style>
 
-    <!-- 引入 Bootstrap 5 JS -->
-    <script src="https://jsdelivr.net"></script>
-</body>
-</html>
+<div class="classic-wrap">
+  <form action="/login" method="POST">
+    <table class="login-table">
+      <tr>
+        <td colspan="3" style="font-size: 18px; font-weight: bold;">請輸入密碼</td>
+      </tr>
+      <tr>
+        <td colspan="3">
+          <input type="password" name="password" style="width: 180px; height: 22px;">
+        </td>
+      </tr>
+      <tr>
+        <td><input type="submit" value="傳送"></td>
+        <td><input type="reset" value="重設"></td>
+        <td><input type="button" value="回主選單" onclick="location.href='{{ url_for('home') }}'"></td>
+      </tr>
+    </table>
+  </form>
+
+  <table class="menu-table">
+    <tr><td>地下兵工廠 測試場 集中地</td></tr>
+    <tr><td><a href="/upload">圖檔單檔上傳</a></td></tr>
+    <tr><td><a href="/pdf-compress">PDF 比例縮放與壓縮對比工具</a></td></tr>
+    <tr><td><a href="/pdf-to-word">PDF 轉 Word 轉換器</a></td></tr>
+    <tr><td><a href="/pdf-to-jpg">把每一頁 PDF變成清楚的 JPG (win10以上)</a></td></tr>
+    <tr class="spacer"><td></td></tr>
+    <tr><td><a href="/office-img-compress">PPT / Excel 圖片瘦身工具</a></td></tr>
+    <tr><td><a href="/excel-img-convert">Excel 圖片轉換器 儲存格中-&gt;儲存格上</a></td></tr>
+    <tr><td><a href="/img-scale-50">圖片比例縮放50%與預覽對比工具</a></td></tr>
+    <tr class="spacer"><td></td></tr>
+    <tr><td><a href="/order-tracking">訂單採購全流程統整追蹤</a></td></tr>
+    <tr><td><a href="/invoice">Invoice 列印</a></td></tr>
+    <tr><td><a href="/packing-list">PACKING List 列印</a></td></tr>
+  </table>
+</div>
+{% endblock %}
